@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-ghost/ghost/core/server/middleware/oauth.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-ghost">npmtest-ghost (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-ghost/ghost/core/server/middleware/oauth.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">13.04% <small>(6 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">13.04% <small>(6 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-ghost/ghost/core/server/middleware/</a> &#187; oauth.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var oauth2orize = require('oauth2orize'),
+    models = require('../models'),
+    utils = require('../utils'),
+    errors = require('../errors'),
+    spamPrevention = require('./spam-prevention'),
+    i18n = require('../i18n'),
+&nbsp;
+    oauthServer,
+    oauth;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function getBearerAutorizationHeader(req) {</span>
+<span class="cstat-no" title="statement not covered" >    var parts,</span>
+        scheme,
+        token;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (req.headers &amp;&amp; req.headers.authorization) {</span>
+<span class="cstat-no" title="statement not covered" >        parts = req.headers.authorization.split(' ');</span>
+<span class="cstat-no" title="statement not covered" >        scheme = parts[0];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (/^Bearer$/i.test(scheme)) {</span>
+<span class="cstat-no" title="statement not covered" >            token = parts[1];</span>
+        }
+    } else <span class="cstat-no" title="statement not covered" >if (req.query &amp;&amp; req.query.access_token) {</span>
+<span class="cstat-no" title="statement not covered" >        token = req.query.access_token;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return token;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function exchangeRefreshToken(client, refreshToken, scope, body, authInfo, done) {</span>
+<span class="cstat-no" title="statement not covered" >    models.Refreshtoken.findOne({token: refreshToken}).then(<span class="fstat-no" title="function not covered" >function then(model) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!model) {</span>
+<span class="cstat-no" title="statement not covered" >            return done(new errors.NoPermissionError(i18n.t('errors.middleware.oauth.invalidRefreshToken')), false);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            var token = model.toJSON(),</span>
+                accessToken = utils.uid(256),
+                accessExpires = Date.now() + utils.ONE_MONTH_MS,
+                refreshExpires = Date.now() + utils.SIX_MONTH_MS;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (token.expires &gt; Date.now()) {</span>
+                // Ember auto refreshes the tokens to avoid auto logout
+                // That's why we have to decrease the expiry of the old access token
+                // On restart, all expired tokens get deleted
+                // We can't just delete the old token, because client credentials can be used in multiple tabs/apps
+                // It's possible that no old access token is send by the client implementation (e.g. none ghost admin client)
+<span class="cstat-no" title="statement not covered" >                models.Accesstoken.findOne({token: authInfo.accessToken || ''})</span>
+                    .then(<span class="fstat-no" title="function not covered" >function (oldAccessToken) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (!oldAccessToken) {</span>
+<span class="cstat-no" title="statement not covered" >                            return;</span>
+                        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        return models.Accesstoken.edit({</span>
+                            expires: Date.now() + utils.FIVE_MINUTES_MS
+                        }, {id: oldAccessToken.id});
+                    })
+                    .then(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                        return models.Accesstoken.add({</span>
+                            token: accessToken,
+                            user_id: token.user_id,
+                            client_id: token.client_id,
+                            expires: accessExpires
+                        });
+                    })
+                    .then(<span class="fstat-no" title="function not covered" >function then() {</span>
+<span class="cstat-no" title="statement not covered" >                        return models.Refreshtoken.edit({expires: refreshExpires}, {id: token.id});</span>
+                    })
+                    .then(<span class="fstat-no" title="function not covered" >function then() {</span>
+<span class="cstat-no" title="statement not covered" >                        return done(null, accessToken, {expires_in: utils.ONE_MONTH_S});</span>
+                    })
+                    .catch(<span class="fstat-no" title="function not covered" >function handleError(error) {</span>
+<span class="cstat-no" title="statement not covered" >                        return done(error, false);</span>
+                    });
+            } else {
+<span class="cstat-no" title="statement not covered" >                done(new errors.UnauthorizedError(i18n.t('errors.middleware.oauth.refreshTokenExpired')), false);</span>
+            }
+        }
+    });
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function exchangePassword(client, username, password, scope, done) {</span>
+    // Validate the client
+<span class="cstat-no" title="statement not covered" >    models.Client.findOne({slug: client.slug}).then(<span class="fstat-no" title="function not covered" >function then(client) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!client) {</span>
+<span class="cstat-no" title="statement not covered" >            return done(new errors.NoPermissionError(i18n.t('errors.middleware.oauth.invalidClient')), false);</span>
+        }
+        // Validate the user
+<span class="cstat-no" title="statement not covered" >        return models.User.check({email: username, password: password}).then(<span class="fstat-no" title="function not covered" >function then(user) {</span></span>
+            // Everything validated, return the access- and refreshtoken
+<span class="cstat-no" title="statement not covered" >            var accessToken = utils.uid(256),</span>
+                refreshToken = utils.uid(256),
+                accessExpires = Date.now() + utils.ONE_HOUR_MS,
+                refreshExpires = Date.now() + utils.ONE_WEEK_MS;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return models.Accesstoken.add(</span>
+                {token: accessToken, user_id: user.id, client_id: client.id, expires: accessExpires}
+            ).then(<span class="fstat-no" title="function not covered" >function then() {</span>
+<span class="cstat-no" title="statement not covered" >                return models.Refreshtoken.add(</span>
+                    {token: refreshToken, user_id: user.id, client_id: client.id, expires: refreshExpires}
+                );
+            }).then(<span class="fstat-no" title="function not covered" >function then() {</span>
+<span class="cstat-no" title="statement not covered" >                spamPrevention.resetCounter(username);</span>
+<span class="cstat-no" title="statement not covered" >                return done(null, accessToken, refreshToken, {expires_in: utils.ONE_HOUR_S});</span>
+            });
+        }).catch(<span class="fstat-no" title="function not covered" >function handleError(error) {</span>
+<span class="cstat-no" title="statement not covered" >            return done(error, false);</span>
+        });
+    });
+}
+&nbsp;
+oauth = {
+&nbsp;
+    init: <span class="fstat-no" title="function not covered" >function init() {</span>
+<span class="cstat-no" title="statement not covered" >        oauthServer = oauth2orize.createServer();</span>
+        // remove all expired accesstokens on startup
+<span class="cstat-no" title="statement not covered" >        models.Accesstoken.destroyAllExpired();</span>
+&nbsp;
+        // remove all expired refreshtokens on startup
+<span class="cstat-no" title="statement not covered" >        models.Refreshtoken.destroyAllExpired();</span>
+&nbsp;
+        // Exchange user id and password for access tokens.  The callback accepts the
+        // `client`, which is exchanging the user's name and password from the
+        // authorization request for verification. If these values are validated, the
+        // application issues an access token on behalf of the user who authorized the code.
+<span class="cstat-no" title="statement not covered" >        oauthServer.exchange(oauth2orize.exchange.password({userProperty: 'client'},</span>
+            exchangePassword));
+&nbsp;
+        // Exchange the refresh token to obtain an access token.  The callback accepts the
+        // `client`, which is exchanging a `refreshToken` previously issued by the server
+        // for verification. If these values are validated, the application issues an
+        // access token on behalf of the user who authorized the code.
+<span class="cstat-no" title="statement not covered" >        oauthServer.exchange(oauth2orize.exchange.refreshToken({userProperty: 'client'},</span>
+            exchangeRefreshToken));
+    },
+&nbsp;
+    // ### Generate access token Middleware
+    // register the oauth2orize middleware for password and refresh token grants
+    generateAccessToken: <span class="fstat-no" title="function not covered" >function generateAccessToken(req, res, next) {</span>
+        // @TODO: see https://github.com/jaredhanson/oauth2orize/issues/182
+<span class="cstat-no" title="statement not covered" >        req.authInfo = {</span>
+            accessToken: getBearerAutorizationHeader(req)
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return oauthServer.token()(req, res, next);</span>
+    }
+};
+&nbsp;
+module.exports = oauth;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 20:21:51 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>

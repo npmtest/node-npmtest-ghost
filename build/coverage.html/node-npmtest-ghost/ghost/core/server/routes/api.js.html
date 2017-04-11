@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-ghost/ghost/core/server/routes/api.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-ghost">npmtest-ghost (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-ghost/ghost/core/server/routes/api.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">4.23% <small>(3 / 71)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 1)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">4.23% <small>(3 / 71)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-ghost/ghost/core/server/routes/</a> &#187; api.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// # API routes
+var express     = require('express'),
+    api         = require('../api'),
+    apiRoutes;
+&nbsp;
+/**
+ * IMPORTANT
+ * - cors middleware MUST happen before pretty urls, because otherwise cors header can get lost
+ * - cors middleware MUST happen after authenticateClient, because authenticateClient reads the trusted domains
+ */
+apiRoutes = <span class="fstat-no" title="function not covered" >function apiRoutes(middleware) {</span>
+<span class="cstat-no" title="statement not covered" >    var router = express.Router(),</span>
+        // Authentication for public endpoints
+        authenticatePublic = [
+            middleware.api.authenticateClient,
+            middleware.api.authenticateUser,
+            middleware.api.requiresAuthorizedUserPublicAPI,
+            middleware.api.cors,
+            middleware.api.prettyUrls
+        ],
+        // Require user for private endpoints
+        authenticatePrivate = [
+            middleware.api.authenticateClient,
+            middleware.api.authenticateUser,
+            middleware.api.requiresAuthorizedUser,
+            middleware.api.cors,
+            middleware.api.prettyUrls
+        ];
+&nbsp;
+    // alias delete with del
+<span class="cstat-no" title="statement not covered" >    router.del = router.delete;</span>
+&nbsp;
+    // send 503 json response in case of maintenance
+<span class="cstat-no" title="statement not covered" >    router.use(middleware.api.maintenance);</span>
+&nbsp;
+    // Check version matches for API requests, depends on res.locals.safeVersion being set
+    // Therefore must come after themeHandler.ghostLocals, for now
+<span class="cstat-no" title="statement not covered" >    router.use(middleware.api.versionMatch);</span>
+&nbsp;
+    // ## CORS pre-flight check
+<span class="cstat-no" title="statement not covered" >    router.options('*', middleware.api.cors);</span>
+&nbsp;
+    // ## Configuration
+<span class="cstat-no" title="statement not covered" >    router.get('/configuration', authenticatePrivate, api.http(api.configuration.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/configuration/:key', authenticatePrivate, api.http(api.configuration.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/configuration/timezones', authenticatePrivate, api.http(api.configuration.read));</span>
+&nbsp;
+    // ## Posts
+<span class="cstat-no" title="statement not covered" >    router.get('/posts', authenticatePublic, api.http(api.posts.browse));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    router.post('/posts', authenticatePrivate, api.http(api.posts.add));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/posts/:id', authenticatePublic, api.http(api.posts.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/posts/slug/:slug', authenticatePublic, api.http(api.posts.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/posts/:id', authenticatePrivate, api.http(api.posts.edit));</span>
+<span class="cstat-no" title="statement not covered" >    router.del('/posts/:id', authenticatePrivate, api.http(api.posts.destroy));</span>
+&nbsp;
+    // ## Schedules
+<span class="cstat-no" title="statement not covered" >    router.put('/schedules/posts/:id', [middleware.api.authenticateClient, middleware.api.authenticateUser], api.http(api.schedules.publishPost));</span>
+&nbsp;
+    // ## Settings
+<span class="cstat-no" title="statement not covered" >    router.get('/settings', authenticatePrivate, api.http(api.settings.browse));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/settings/:key', authenticatePrivate, api.http(api.settings.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/settings', authenticatePrivate, api.http(api.settings.edit));</span>
+&nbsp;
+    // ## Users
+<span class="cstat-no" title="statement not covered" >    router.get('/users', authenticatePublic, api.http(api.users.browse));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    router.get('/users/:id', authenticatePublic, api.http(api.users.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/users/slug/:slug', authenticatePublic, api.http(api.users.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/users/email/:email', authenticatePublic, api.http(api.users.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/users/password', authenticatePrivate, api.http(api.users.changePassword));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/users/owner', authenticatePrivate, api.http(api.users.transferOwnership));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/users/:id', authenticatePrivate, api.http(api.users.edit));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/users', authenticatePrivate, api.http(api.users.add));</span>
+<span class="cstat-no" title="statement not covered" >    router.del('/users/:id', authenticatePrivate, api.http(api.users.destroy));</span>
+&nbsp;
+    // ## Tags
+<span class="cstat-no" title="statement not covered" >    router.get('/tags', authenticatePublic, api.http(api.tags.browse));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/tags/:id', authenticatePublic, api.http(api.tags.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/tags/slug/:slug', authenticatePublic, api.http(api.tags.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/tags', authenticatePrivate, api.http(api.tags.add));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/tags/:id', authenticatePrivate, api.http(api.tags.edit));</span>
+<span class="cstat-no" title="statement not covered" >    router.del('/tags/:id', authenticatePrivate, api.http(api.tags.destroy));</span>
+&nbsp;
+    // ## Subscribers
+<span class="cstat-no" title="statement not covered" >    router.get('/subscribers', middleware.api.labs.subscribers, authenticatePrivate, api.http(api.subscribers.browse));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/subscribers/csv', middleware.api.labs.subscribers, authenticatePrivate, api.http(api.subscribers.exportCSV));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/subscribers/csv',</span>
+        middleware.api.labs.subscribers,
+        authenticatePrivate,
+        middleware.upload.single('subscribersfile'),
+        middleware.validation.upload({type: 'subscribers'}),
+        api.http(api.subscribers.importCSV)
+    );
+<span class="cstat-no" title="statement not covered" >    router.get('/subscribers/:id', middleware.api.labs.subscribers, authenticatePrivate, api.http(api.subscribers.read));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/subscribers', middleware.api.labs.subscribers, authenticatePublic, api.http(api.subscribers.add));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/subscribers/:id', middleware.api.labs.subscribers, authenticatePrivate, api.http(api.subscribers.edit));</span>
+<span class="cstat-no" title="statement not covered" >    router.del('/subscribers/:id',  middleware.api.labs.subscribers, authenticatePrivate, api.http(api.subscribers.destroy));</span>
+&nbsp;
+    // ## Roles
+<span class="cstat-no" title="statement not covered" >    router.get('/roles/', authenticatePrivate, api.http(api.roles.browse));</span>
+&nbsp;
+    // ## Clients
+<span class="cstat-no" title="statement not covered" >    router.get('/clients/slug/:slug', api.http(api.clients.read));</span>
+&nbsp;
+    // ## Slugs
+<span class="cstat-no" title="statement not covered" >    router.get('/slugs/:type/:name', authenticatePrivate, api.http(api.slugs.generate));</span>
+&nbsp;
+    // ## Themes
+<span class="cstat-no" title="statement not covered" >    router.get('/themes/:name/download',</span>
+        authenticatePrivate,
+        api.http(api.themes.download)
+    );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    router.post('/themes/upload',</span>
+        authenticatePrivate,
+        middleware.upload.single('theme'),
+        middleware.validation.upload({type: 'themes'}),
+        api.http(api.themes.upload)
+    );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    router.del('/themes/:name',</span>
+        authenticatePrivate,
+        api.http(api.themes.destroy)
+    );
+&nbsp;
+    // ## Notifications
+<span class="cstat-no" title="statement not covered" >    router.get('/notifications', authenticatePrivate, api.http(api.notifications.browse));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/notifications', authenticatePrivate, api.http(api.notifications.add));</span>
+<span class="cstat-no" title="statement not covered" >    router.del('/notifications/:id', authenticatePrivate, api.http(api.notifications.destroy));</span>
+&nbsp;
+    // ## DB
+<span class="cstat-no" title="statement not covered" >    router.get('/db', authenticatePrivate, api.http(api.db.exportContent));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/db',</span>
+        authenticatePrivate,
+        middleware.upload.single('importfile'),
+        middleware.validation.upload({type: 'db'}),
+        api.http(api.db.importContent)
+    );
+<span class="cstat-no" title="statement not covered" >    router.del('/db', authenticatePrivate, api.http(api.db.deleteAllContent));</span>
+&nbsp;
+    // ## Mail
+<span class="cstat-no" title="statement not covered" >    router.post('/mail', authenticatePrivate, api.http(api.mail.send));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/mail/test', authenticatePrivate, api.http(api.mail.sendTest));</span>
+&nbsp;
+    // ## Slack
+<span class="cstat-no" title="statement not covered" >    router.post('/slack/test', authenticatePrivate, api.http(api.slack.sendTest));</span>
+&nbsp;
+    // ## Authentication
+<span class="cstat-no" title="statement not covered" >    router.post('/authentication/passwordreset',</span>
+        middleware.spamPrevention.forgotten,
+        api.http(api.authentication.generateResetToken)
+    );
+&nbsp;
+    // ## Endpoint to exchange a one time access-token with a pair of AT/RT
+<span class="cstat-no" title="statement not covered" >    router.post('/authentication/setup/three', middleware.api.authenticateClient, api.http(api.authentication.onSetupStep3));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    router.put('/authentication/passwordreset', api.http(api.authentication.resetPassword));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/authentication/invitation', api.http(api.authentication.acceptInvitation));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/authentication/invitation', api.http(api.authentication.isInvitation));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/authentication/setup', api.http(api.authentication.setup));</span>
+<span class="cstat-no" title="statement not covered" >    router.put('/authentication/setup', authenticatePrivate, api.http(api.authentication.updateSetup));</span>
+<span class="cstat-no" title="statement not covered" >    router.get('/authentication/setup', api.http(api.authentication.isSetup));</span>
+<span class="cstat-no" title="statement not covered" >    router.post('/authentication/token',</span>
+        middleware.spamPrevention.signin,
+        middleware.api.authenticateClient,
+        middleware.oauth.generateAccessToken
+    );
+<span class="cstat-no" title="statement not covered" >    router.post('/authentication/revoke', authenticatePrivate, api.http(api.authentication.revoke));</span>
+&nbsp;
+    // ## Uploads
+    // @TODO: rename endpoint to /images/upload (or similar)
+<span class="cstat-no" title="statement not covered" >    router.post('/uploads',</span>
+        authenticatePrivate,
+        middleware.upload.single('uploadimage'),
+        middleware.validation.upload({type: 'images'}),
+        api.http(api.uploads.add)
+    );
+&nbsp;
+    // API Router middleware
+<span class="cstat-no" title="statement not covered" >    router.use(middleware.api.errorHandler);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return router;</span>
+};
+&nbsp;
+module.exports = apiRoutes;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 20:21:51 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>

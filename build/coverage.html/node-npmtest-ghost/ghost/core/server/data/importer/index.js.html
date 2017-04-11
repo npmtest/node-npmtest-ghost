@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-ghost/ghost/core/server/data/importer/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-ghost">npmtest-ghost (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-ghost/ghost/core/server/data/importer/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">8.79% <small>(8 / 91)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 39)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">2.44% <small>(1 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">8.79% <small>(8 / 91)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-ghost/ghost/core/server/data/importer/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var _            = require('lodash'),
+    Promise      = require('bluebird'),
+    sequence     = require('../../utils/sequence'),
+    pipeline     = require('../../utils/pipeline'),
+    fs           = require('fs-extra'),
+    path         = require('path'),
+    os           = require('os'),
+    glob         = require('glob'),
+    uuid         = require('uuid'),
+    extract      = require('extract-zip-fork'),
+    errors       = require('../../errors'),
+    ImageHandler    = require('./handlers/image'),
+    JSONHandler     = require('./handlers/json'),
+    MarkdownHandler = require('./handlers/markdown'),
+    ImageImporter   = require('./importers/image'),
+    DataImporter    = require('./importers/data'),
+    i18n            = require('../../i18n'),
+&nbsp;
+    // Glob levels
+    ROOT_ONLY = 0,
+    ROOT_OR_SINGLE_DIR = 1,
+    ALL_DIRS = 2,
+&nbsp;
+    defaults;
+&nbsp;
+defaults = {
+    extensions: ['.zip'],
+    contentTypes: ['application/zip', 'application/x-zip-compressed'],
+    directories: []
+};
+&nbsp;
+function ImportManager() {
+    this.importers = [ImageImporter, DataImporter];
+    this.handlers = [ImageHandler, JSONHandler, MarkdownHandler];
+    // Keep track of files to cleanup at the end
+    this.filesToDelete = [];
+}
+&nbsp;
+/**
+ * A number, or a string containing a number.
+ * @typedef {Object} ImportData
+ * @property [Object] data
+ * @property [Array] images
+ */
+&nbsp;
+_.extend(ImportManager.prototype, {
+    /**
+     * Get an array of all the file extensions for which we have handlers
+     * @returns {string[]}
+     */
+    getExtensions: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return _.flatten(_.union(_.map(this.handlers, 'extensions'), defaults.extensions));</span>
+    },
+    /**
+     * Get an array of all the mime types for which we have handlers
+     * @returns {string[]}
+     */
+    getContentTypes: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return _.flatten(_.union(_.map(this.handlers, 'contentTypes'), defaults.contentTypes));</span>
+    },
+    /**
+     * Get an array of directories for which we have handlers
+     * @returns {string[]}
+     */
+    getDirectories: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return _.flatten(_.union(_.map(this.handlers, 'directories'), defaults.directories));</span>
+    },
+    /**
+     * Convert items into a glob string
+     * @param {String[]} items
+     * @returns {String}
+     */
+    getGlobPattern: <span class="fstat-no" title="function not covered" >function (items) {</span>
+<span class="cstat-no" title="statement not covered" >        return '+(' + _.reduce(items, <span class="fstat-no" title="function not covered" >function (memo, ext) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return memo !== '' ? memo + '|'  + ext : ext;</span>
+        }, '') + ')';
+    },
+    /**
+     * @param {String[]} extensions
+     * @param {Number} level
+     * @returns {String}
+     */
+    getExtensionGlob: <span class="fstat-no" title="function not covered" >function (extensions, level) {</span>
+<span class="cstat-no" title="statement not covered" >        var prefix = level === ALL_DIRS ? '**/*' :</span>
+            (level === ROOT_OR_SINGLE_DIR ? '{*/*,*}' : '*');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return prefix + this.getGlobPattern(extensions);</span>
+    },
+    /**
+     *
+     * @param {String[]} directories
+     * @param {Number} level
+     * @returns {String}
+     */
+    getDirectoryGlob: <span class="fstat-no" title="function not covered" >function (directories, level) {</span>
+<span class="cstat-no" title="statement not covered" >        var prefix = level === ALL_DIRS ? '**/' :</span>
+            (level === ROOT_OR_SINGLE_DIR ? '{*/,}' : '');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return prefix + this.getGlobPattern(directories);</span>
+    },
+    /**
+     * Remove files after we're done (abstracted into a function for easier testing)
+     * @returns {Function}
+     */
+    cleanUp: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        var filesToDelete = this.filesToDelete;</span>
+<span class="cstat-no" title="statement not covered" >        return <span class="fstat-no" title="function not covered" >function (result) {</span></span>
+<span class="cstat-no" title="statement not covered" >            _.each(filesToDelete, <span class="fstat-no" title="function not covered" >function (fileToDelete) {</span></span>
+<span class="cstat-no" title="statement not covered" >                fs.remove(fileToDelete, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                        errors.logError(err, i18n.t('errors.data.importer.index.couldNotCleanUpFile.error'),</span>
+                                        i18n.t('errors.data.importer.index.couldNotCleanUpFile.context'));
+                    }
+                });
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result;</span>
+        };
+    },
+    /**
+     * Return true if the given file is a Zip
+     * @returns Boolean
+     */
+    isZip: <span class="fstat-no" title="function not covered" >function (ext) {</span>
+<span class="cstat-no" title="statement not covered" >        return _.includes(defaults.extensions, ext);</span>
+    },
+    /**
+     * Checks the content of a zip folder to see if it is valid.
+     * Importable content includes any files or directories which the handlers can process
+     * Importable content must be found either in the root, or inside one base directory
+     *
+     * @param {String} directory
+     * @returns {Promise}
+     */
+    isValidZip: <span class="fstat-no" title="function not covered" >function (directory) {</span>
+        // Globs match content in the root or inside a single directory
+<span class="cstat-no" title="statement not covered" >        var extMatchesBase = glob.sync(</span>
+                this.getExtensionGlob(this.getExtensions(), ROOT_OR_SINGLE_DIR), {cwd: directory}
+            ),
+            extMatchesAll = glob.sync(
+                this.getExtensionGlob(this.getExtensions(), ALL_DIRS), {cwd: directory}
+            ),
+            dirMatches = glob.sync(
+                this.getDirectoryGlob(this.getDirectories(), ROOT_OR_SINGLE_DIR), {cwd: directory}
+            ),
+            oldRoonMatches = glob.sync(this.getDirectoryGlob(['drafts', 'published', 'deleted'], ROOT_OR_SINGLE_DIR),
+                {cwd: directory});
+&nbsp;
+        // This is a temporary extra message for the old format roon export which doesn't work with Ghost
+<span class="cstat-no" title="statement not covered" >        if (oldRoonMatches.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new errors.UnsupportedMediaTypeError(</span>
+                i18n.t('errors.data.importer.index.unsupportedRoonExport')
+            );
+        }
+&nbsp;
+        // If this folder contains importable files or a content or images directory
+<span class="cstat-no" title="statement not covered" >        if (extMatchesBase.length &gt; 0 || (dirMatches.length &gt; 0 &amp;&amp; extMatchesAll.length &gt; 0)) {</span>
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (extMatchesAll.length &lt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new errors.UnsupportedMediaTypeError(</span>
+                i18n.t('errors.data.importer.index.noContentToImport'));
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        throw new errors.UnsupportedMediaTypeError(</span>
+            i18n.t('errors.data.importer.index.invalidZipStructure'));
+    },
+    /**
+     * Use the extract module to extract the given zip file to a temp directory &amp; return the temp directory path
+     * @param {String} filePath
+     * @returns {Promise[]} Files
+     */
+    extractZip: <span class="fstat-no" title="function not covered" >function (filePath) {</span>
+<span class="cstat-no" title="statement not covered" >        var tmpDir = path.join(os.tmpdir(), uuid.v4());</span>
+<span class="cstat-no" title="statement not covered" >        this.filesToDelete.push(tmpDir);</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.promisify(extract)(filePath, {dir: tmpDir}).then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            return tmpDir;</span>
+        });
+    },
+    /**
+     * Use the handler extensions to get a globbing pattern, then use that to fetch all the files from the zip which
+     * are relevant to the given handler, and return them as a name and path combo
+     * @param {Object} handler
+     * @param {String} directory
+     * @returns [] Files
+     */
+    getFilesFromZip: <span class="fstat-no" title="function not covered" >function (handler, directory) {</span>
+<span class="cstat-no" title="statement not covered" >        var globPattern = this.getExtensionGlob(handler.extensions, ALL_DIRS);</span>
+<span class="cstat-no" title="statement not covered" >        return _.map(glob.sync(globPattern, {cwd: directory}), <span class="fstat-no" title="function not covered" >function (file) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return {name: file, path: path.join(directory, file)};</span>
+        });
+    },
+    /**
+     * Get the name of the single base directory if there is one, else return an empty string
+     * @param {String} directory
+     * @returns {Promise (String)}
+     */
+    getBaseDirectory: <span class="fstat-no" title="function not covered" >function (directory) {</span>
+        // Globs match root level only
+<span class="cstat-no" title="statement not covered" >        var extMatches = glob.sync(this.getExtensionGlob(this.getExtensions(), ROOT_ONLY), {cwd: directory}),</span>
+            dirMatches = glob.sync(this.getDirectoryGlob(this.getDirectories(), ROOT_ONLY), {cwd: directory}),
+            extMatchesAll;
+&nbsp;
+        // There is no base directory
+<span class="cstat-no" title="statement not covered" >        if (extMatches.length &gt; 0 || dirMatches.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+        // There is a base directory, grab it from any ext match
+<span class="cstat-no" title="statement not covered" >        extMatchesAll = glob.sync(</span>
+            this.getExtensionGlob(this.getExtensions(), ALL_DIRS), {cwd: directory}
+        );
+<span class="cstat-no" title="statement not covered" >        if (extMatchesAll.length &lt; 1 || extMatchesAll[0].split('/') &lt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new errors.ValidationError(i18n.t('errors.data.importer.index.invalidZipFileBaseDirectory'));</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return extMatchesAll[0].split('/')[0];</span>
+    },
+    /**
+     * Process Zip
+     * Takes a reference to a zip file, extracts it, sends any relevant files from inside to the right handler, and
+     * returns an object in the importData format: {data: {}, images: []}
+     * The data key contains JSON representing any data that should be imported
+     * The image key contains references to images that will be stored (and where they will be stored)
+     * @param {File} file
+     * @returns {Promise(ImportData)}
+     */
+    processZip: <span class="fstat-no" title="function not covered" >function (file) {</span>
+<span class="cstat-no" title="statement not covered" >        var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this.extractZip(file.path).then(<span class="fstat-no" title="function not covered" >function (zipDirectory) {</span></span>
+<span class="cstat-no" title="statement not covered" >            var ops = [],</span>
+                importData = {},
+                baseDir;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            self.isValidZip(zipDirectory);</span>
+<span class="cstat-no" title="statement not covered" >            baseDir = self.getBaseDirectory(zipDirectory);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            _.each(self.handlers, <span class="fstat-no" title="function not covered" >function (handler) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (importData.hasOwnProperty(handler.type)) {</span>
+                    // This limitation is here to reduce the complexity of the importer for now
+<span class="cstat-no" title="statement not covered" >                    return Promise.reject(new errors.UnsupportedMediaTypeError(</span>
+                        i18n.t('errors.data.importer.index.zipContainsMultipleDataFormats')
+                    ));
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                var files = self.getFilesFromZip(handler, zipDirectory);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (files.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    ops.push(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                        return handler.loadFile(files, baseDir).then(<span class="fstat-no" title="function not covered" >function (data) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            importData[handler.type] = data;</span>
+                        });
+                    });
+                }
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (ops.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.reject(new errors.UnsupportedMediaTypeError(</span>
+                    i18n.t('errors.data.importer.index.noContentToImport')
+                ));
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return sequence(ops).then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                return importData;</span>
+            });
+        });
+    },
+    /**
+     * Process File
+     * Takes a reference to a single file, sends it to the relevant handler to be loaded and returns an object in the
+     * importData format: {data: {}, images: []}
+     * The data key contains JSON representing any data that should be imported
+     * The image key contains references to images that will be stored (and where they will be stored)
+     * @param {File} file
+     * @returns {Promise(ImportData)}
+     */
+    processFile: <span class="fstat-no" title="function not covered" >function (file, ext) {</span>
+<span class="cstat-no" title="statement not covered" >        var fileHandler = _.find(this.handlers, <span class="fstat-no" title="function not covered" >function (handler) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return _.includes(handler.extensions, ext);</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return fileHandler.loadFile([_.pick(file, 'name', 'path')]).then(<span class="fstat-no" title="function not covered" >function (loadedData) {</span></span>
+            // normalize the returned data
+<span class="cstat-no" title="statement not covered" >            var importData = {};</span>
+<span class="cstat-no" title="statement not covered" >            importData[fileHandler.type] = loadedData;</span>
+<span class="cstat-no" title="statement not covered" >            return importData;</span>
+        });
+    },
+    /**
+     * Import Step 1:
+     * Load the given file into usable importData in the format: {data: {}, images: []}, regardless of
+     * whether the file is a single importable file like a JSON file, or a zip file containing loads of files.
+     * @param {File} file
+     * @returns {Promise}
+     */
+    loadFile: <span class="fstat-no" title="function not covered" >function (file) {</span>
+<span class="cstat-no" title="statement not covered" >        var self = this,</span>
+            ext = path.extname(file.name).toLowerCase();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.filesToDelete.push(file.path);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this.isZip(ext) ? self.processZip(file) : self.processFile(file, ext);</span>
+    },
+    /**
+     * Import Step 2:
+     * Pass the prepared importData through the preProcess function of the various importers, so that the importers can
+     * make any adjustments to the data based on relationships between it
+     * @param {ImportData} importData
+     * @returns {Promise(ImportData)}
+     */
+    preProcess: <span class="fstat-no" title="function not covered" >function (importData) {</span>
+<span class="cstat-no" title="statement not covered" >        var ops = [];</span>
+<span class="cstat-no" title="statement not covered" >        _.each(this.importers, <span class="fstat-no" title="function not covered" >function (importer) {</span></span>
+<span class="cstat-no" title="statement not covered" >            ops.push(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                return importer.preProcess(importData);</span>
+            });
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return pipeline(ops);</span>
+    },
+    /**
+     * Import Step 3:
+     * Each importer gets passed the data from importData which has the key matching its type - i.e. it only gets the
+     * data that it should import. Each importer then handles actually importing that data into Ghost
+     * @param {ImportData} importData
+     * @returns {Promise(ImportData)}
+     */
+    doImport: <span class="fstat-no" title="function not covered" >function (importData) {</span>
+<span class="cstat-no" title="statement not covered" >        var ops = [];</span>
+<span class="cstat-no" title="statement not covered" >        _.each(this.importers, <span class="fstat-no" title="function not covered" >function (importer) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (importData.hasOwnProperty(importer.type)) {</span>
+<span class="cstat-no" title="statement not covered" >                ops.push(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                    return importer.doImport(importData[importer.type]);</span>
+                });
+            }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return sequence(ops).then(<span class="fstat-no" title="function not covered" >function (importResult) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return importResult;</span>
+        });
+    },
+    /**
+     * Import Step 4:
+     * Report on what was imported, currently a no-op
+     * @param {ImportData} importData
+     * @returns {Promise(ImportData)}
+     */
+    generateReport: <span class="fstat-no" title="function not covered" >function (importData) {</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.resolve(importData);</span>
+    },
+    /**
+     * Import From File
+     * The main method of the ImportManager, call this to kick everything off!
+     * @param {File} file
+     * @returns {Promise}
+     */
+    importFromFile: <span class="fstat-no" title="function not covered" >function (file) {</span>
+<span class="cstat-no" title="statement not covered" >        var self = this;</span>
+&nbsp;
+        // Step 1: Handle converting the file to usable data
+<span class="cstat-no" title="statement not covered" >        return this.loadFile(file).then(<span class="fstat-no" title="function not covered" >function (importData) {</span></span>
+            // Step 2: Let the importers pre-process the data
+<span class="cstat-no" title="statement not covered" >            return self.preProcess(importData);</span>
+        }).then(<span class="fstat-no" title="function not covered" >function (importData) {</span>
+            // Step 3: Actually do the import
+            // @TODO: It would be cool to have some sort of dry run flag here
+<span class="cstat-no" title="statement not covered" >            return self.doImport(importData);</span>
+        }).then(<span class="fstat-no" title="function not covered" >function (importData) {</span>
+            // Step 4: Report on the import
+<span class="cstat-no" title="statement not covered" >            return self.generateReport(importData)</span>
+                // Step 5: Cleanup any files
+                .finally(self.cleanUp());
+        });
+    }
+});
+&nbsp;
+module.exports = new ImportManager();
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 20:21:51 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
