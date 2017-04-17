@@ -234,7 +234,7 @@
 <tspan x="10" y="3706">  ├─┬ ghost-ignition@2.8.10 </tspan>
 <tspan x="10" y="3722">  │ ├─┬ bunyan@1.8.5 </tspan>
 <tspan x="10" y="3738">  │ │ ├─┬ dtrace-provider@0.8.1 </tspan>
-<tspan x="10" y="3754">  │ │ │ └── nan@2.6.1 </tspan>
+<tspan x="10" y="3754">  │ │ │ └── nan@2.6.2 </tspan>
 <tspan x="10" y="3770">  │ │ ├─┬ mv@2.1.1 </tspan>
 <tspan x="10" y="3786">  │ │ │ └── ncp@2.0.0 </tspan>
 <tspan x="10" y="3802">  │ │ └── safe-json-stringify@1.0.4 </tspan>
@@ -342,7 +342,7 @@
 <tspan x="10" y="5434">  │   │ │ │ ├── extsprintf@1.0.2 </tspan>
 <tspan x="10" y="5450">  │   │ │ │ ├── json-schema@0.2.3 </tspan>
 <tspan x="10" y="5466">  │   │ │ │ └── verror@1.3.6 </tspan>
-<tspan x="10" y="5482">  │   │ │ └─┬ sshpk@1.11.0 </tspan>
+<tspan x="10" y="5482">  │   │ │ └─┬ sshpk@1.13.0 </tspan>
 <tspan x="10" y="5498">  │   │ │   ├── asn1@0.2.3 </tspan>
 <tspan x="10" y="5514">  │   │ │   ├── assert-plus@1.0.0 </tspan>
 <tspan x="10" y="5530">  │   │ │   ├── bcrypt-pbkdf@1.0.1 </tspan>
@@ -403,7 +403,7 @@
 <tspan x="10" y="6410">  │ │ │ │ └── is-extglob@1.0.0 </tspan>
 <tspan x="10" y="6426">  │ │ │ ├─┬ micromatch@2.3.11 </tspan>
 <tspan x="10" y="6442">  │ │ │ │ ├─┬ arr-diff@2.0.0 </tspan>
-<tspan x="10" y="6458">  │ │ │ │ │ └── arr-flatten@1.0.1 </tspan>
+<tspan x="10" y="6458">  │ │ │ │ │ └── arr-flatten@1.0.3 </tspan>
 <tspan x="10" y="6474">  │ │ │ │ ├── array-unique@0.2.1 </tspan>
 <tspan x="10" y="6490">  │ │ │ │ ├─┬ braces@1.8.5 </tspan>
 <tspan x="10" y="6506">  │ │ │ │ │ ├─┬ expand-range@1.8.2 </tspan>
